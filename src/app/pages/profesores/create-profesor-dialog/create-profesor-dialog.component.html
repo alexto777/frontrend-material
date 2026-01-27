@@ -1,19 +1,19 @@
-<h2>Nuevo profesor</h2>
+<h2 mat-dialog-title>{{ form.value.nombre ? 'Editar profesor' : 'Nuevo profesor' }}</h2>
 
-<form [formGroup]="form" class="dialog-form">
+<form [formGroup]="form" class="dialog-form" style="width: 100%; padding: 8px;">
+
   <mat-form-field appearance="outline" class="full-width">
     <mat-label>Nombre</mat-label>
     <input matInput formControlName="nombre" />
   </mat-form-field>
 
-  <div class="actions">
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Materia</mat-label>
+    <input matInput formControlName="especialidad" />
+  </mat-form-field>
+
+  <div class="actions" style="display:flex; justify-content:flex-end; gap:8px; margin-top:12px;">
     <button mat-button (click)="cancelar()">Cancelar</button>
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="guardar()"
-      [disabled]="form.invalid">
-      Crear
-    </button>
+    <button mat-raised-button color="primary" (click)="guardar()" [disabled]="form.invalid">Guardar</button>
   </div>
 </form>

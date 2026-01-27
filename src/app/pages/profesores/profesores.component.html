@@ -23,6 +23,12 @@
     </mat-cell>
   </ng-container>
 
+  <ng-container matColumnDef="especialidad">
+    <th mat-header-cell *matHeaderCellDef> Materia </th>
+    <td mat-cell *matCellDef="let p"> {{ p.especialidad }} </td>
+  </ng-container>
+
+
   <!-- Acciones -->
   <ng-container matColumnDef="acciones">
     <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>

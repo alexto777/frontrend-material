@@ -1,9 +1,11 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, Validators, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-create-profesor-dialog',
@@ -11,32 +13,37 @@ import { MatInputModule } from '@angular/material/input';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MatButtonModule,
-    MatInputModule
+    MatFormFieldModule, // necesario para <mat-form-field>
+    MatInputModule,
+    MatButtonModule
   ],
   templateUrl: './create-profesor-dialog.component.html',
   styleUrls: ['./create-profesor-dialog.component.scss']
 })
-export class CreateProfesorDialogComponent {
+export class CreateProfesorDialogComponent implements OnInit {
 
-  form = this.fb.group({
-    nombre: ['', Validators.required]
-  });
+  form!: FormGroup;
 
   constructor(
-  private fb: FormBuilder,
-  private dialogRef: MatDialogRef<CreateProfesorDialogComponent>,
-  @Inject(MAT_DIALOG_DATA) public data?: any
-) {
-  this.form = this.fb.group({
-    nombre: [data?.nombre || '', Validators.required]
-  });
-}
+    private fb: FormBuilder,
+    private dialogRef: MatDialogRef<CreateProfesorDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
+
+  ngOnInit(): void {
+    this.form = this.fb.group({
+      nombre: [this.data?.nombre ?? '', Validators.required],
+      especialidad: [this.data?.especialidad ?? '', Validators.required]
+    });
+  }
 
   guardar() {
-    if (this.form.valid) {
-      this.dialogRef.close(this.form.value);
-    }
+    const dto = {
+      nombre: this.form.value.nombre,
+      especialidad: this.form.value.especialidad
+    };
+
+    this.dialogRef.close(dto);
   }
 
   cancelar() {
