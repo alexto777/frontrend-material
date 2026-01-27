@@ -1,0 +1,33 @@
+.page-title {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.page-subtitle {
+  color: #64748b;
+  margin-bottom: 24px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+}
+
+.info-card {
+  padding: 24px;
+  border-radius: 12px;
+}
+
+.info-card h3 {
+  font-size: 14px;
+  color: #64748b;
+  margin-bottom: 8px;
+}
+
+.info-card .value {
+  font-size: 32px;
+  font-weight: 700;
+  color: #0f172a;
+}

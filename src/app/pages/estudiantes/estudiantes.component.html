@@ -1,0 +1,96 @@
+<h1 class="page-title">Estudiantes</h1>
+<p class="page-subtitle">
+  Administración de estudiantes registrados en el sistema
+</p>
+
+<!-- Barra superior -->
+<div class="page-actions">
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="crear()">
+    <mat-icon>person_add</mat-icon>
+    Nuevo estudiante
+  </button>
+</div>
+
+<mat-table [dataSource]="dataSource" class="mat-elevation-z2">
+
+  <ng-container matColumnDef="nombre">
+  <mat-header-cell *matHeaderCellDef> Estudiante </mat-header-cell>
+
+  <mat-cell *matCellDef="let e">
+    <ng-container *ngIf="!e.editando; else editNombre">
+      {{ e.nombre }}
+    </ng-container>
+
+    <ng-template #editNombre>
+      <input
+        matInput
+        [(ngModel)]="e.nombreEditado"
+        style="max-width: 200px"
+      />
+    </ng-template>
+  </mat-cell>
+</ng-container>
+
+
+  <ng-container matColumnDef="notas">
+    <mat-header-cell *matHeaderCellDef> Notas </mat-header-cell>
+    <mat-cell *matCellDef="let e"> {{ e.cantidadNotas }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="acciones">
+    <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+
+    <mat-cell *matCellDef="let e">
+
+      <!-- EDITAR -->
+      <button
+        *ngIf="!e.editando"
+        mat-icon-button
+        color="primary"
+        (click)="activarEdicion(e)">
+        <mat-icon>edit</mat-icon>
+      </button>
+
+      <!-- GUARDAR -->
+      <button
+        *ngIf="e.editando"
+        mat-icon-button
+        color="primary"
+        (click)="guardarEdicion(e)">
+        <mat-icon>check</mat-icon>
+      </button>
+
+      <!-- CANCELAR -->
+      <button
+        *ngIf="e.editando"
+        mat-icon-button
+        (click)="cancelarEdicion(e)">
+        <mat-icon>close</mat-icon>
+      </button>
+
+      <!-- ELIMINAR -->
+      <button
+        mat-icon-button
+        color="warn"
+        [disabled]="e.cantidadNotas > 0 || e.editando"
+        (click)="eliminar(e)">
+        <mat-icon>delete</mat-icon>
+      </button>
+
+    </mat-cell>
+  </ng-container>
+
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+</mat-table>
+
+<mat-paginator
+  [pageSize]="5"
+  [pageSizeOptions]="[5]"
+  showFirstLastButtons>
+</mat-paginator>

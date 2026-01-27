@@ -1,0 +1,17 @@
+.layout-container {
+  height: 100vh;
+  background-color: #f8fafc; // gris claro Notus
+}
+
+.sidenav {
+  width: 260px;
+  background-color: #ffffff;
+  border-right: 1px solid #e5e7eb;
+  padding: 16px 8px;
+}
+
+.content {
+  padding: 32px;
+  background-color: #f8fafc;
+  min-height: calc(100vh - 64px);
+}

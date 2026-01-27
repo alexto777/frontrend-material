@@ -1,0 +1,24 @@
+mat-nav-list {
+  padding-top: 16px;
+}
+
+a.mat-mdc-list-item {
+  color: #334155;
+  margin: 6px 8px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+a.mat-mdc-list-item mat-icon {
+  color: #64748b;
+  margin-right: 12px;
+}
+
+a.mat-mdc-list-item:hover {
+  background-color: #f1f5f9;
+}
+
+a.mat-mdc-list-item.active {
+  background-color: #e5e7eb;
+  font-weight: 600;
+}

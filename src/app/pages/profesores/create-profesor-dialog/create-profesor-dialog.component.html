@@ -1,0 +1,19 @@
+<h2>Nuevo profesor</h2>
+
+<form [formGroup]="form" class="dialog-form">
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Nombre</mat-label>
+    <input matInput formControlName="nombre" />
+  </mat-form-field>
+
+  <div class="actions">
+    <button mat-button (click)="cancelar()">Cancelar</button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="guardar()"
+      [disabled]="form.invalid">
+      Crear
+    </button>
+  </div>
+</form>
