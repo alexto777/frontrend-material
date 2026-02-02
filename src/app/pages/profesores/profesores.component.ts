@@ -101,7 +101,7 @@ export class ProfesoresComponent implements OnInit {
       error: err => {
         if (err.status === 400) {
           this.snackBar.open(
-            'El profesor tiene notas asociadas',
+            'El profesor tiene estudiantes asignados con notas',
             'Cerrar',
             { duration: 4000 }
           );

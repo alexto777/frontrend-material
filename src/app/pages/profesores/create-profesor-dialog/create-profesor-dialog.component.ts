@@ -13,7 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MatFormFieldModule, // necesario para <mat-form-field>
+    MatFormFieldModule,
     MatInputModule,
     MatButtonModule
   ],

@@ -112,7 +112,7 @@ export class EstudiantesComponent implements OnInit {
     });
   }
 
-  activarEdicion(estudiante: Estudiante) {
+activarEdicion(estudiante: Estudiante) {
   estudiante.editando = true;
   estudiante.nombreEditado = estudiante.nombre;
 }
