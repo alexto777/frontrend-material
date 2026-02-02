@@ -18,7 +18,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatButtonModule
   ],
   templateUrl: './create-profesor-dialog.component.html',
-  styleUrls: ['./create-profesor-dialog.component.scss']
 })
 export class CreateProfesorDialogComponent implements OnInit {
 

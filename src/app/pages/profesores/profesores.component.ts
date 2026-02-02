@@ -19,15 +19,14 @@ import { Profesor } from '../../core/models/profesor.model';
     MatButtonModule,
     MatIconModule,
     MatDialogModule,
-    MatSnackBarModule,
-    CreateProfesorDialogComponent
+    MatSnackBarModule
   ],
   templateUrl: './profesores.component.html',
   styleUrls: ['./profesores.component.scss']
 })
 export class ProfesoresComponent implements OnInit {
 
-  displayedColumns = ['nombre', 'especialidad', 'acciones'];
+  displayedColumns = ['nombre','acciones'];
   dataSource: Profesor[] = [];
 
   constructor(
@@ -70,17 +69,20 @@ export class ProfesoresComponent implements OnInit {
   editar(profesor: Profesor) {
     const dialogRef = this.dialog.open(CreateProfesorDialogComponent, {
       data: {
+        id: profesor.id,
         nombre: profesor.nombre,
-        especialidad: profesor.especialidad
+        materiaId: (profesor as any).materiaId ?? null
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (!result) return;
 
-      // id en la URL, body = { nombre, especialidad } -> coincide con ProfesorUpdateDto
-      this.service.update(profesor.id, result).subscribe({
-        next: () => this.load(),
+      this.service.update(result.id, result).subscribe({
+        next: () => {
+          this.snackBar.open('Profesor actualizado', 'OK', { duration: 2000 });
+          this.load();
+        },
         error: err => {
           console.error('ERROR PUT 👉', err);
           this.snackBar.open('Error actualizando profesor', 'Cerrar', { duration: 3000 });
@@ -104,7 +106,6 @@ export class ProfesoresComponent implements OnInit {
             { duration: 4000 }
           );
         } else {
-          console.error('ERROR DELETE 👉', err);
           this.snackBar.open('Error eliminando profesor', 'Cerrar', { duration: 3000 });
         }
       }

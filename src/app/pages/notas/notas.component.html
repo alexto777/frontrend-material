@@ -1,16 +1,48 @@
 <h1 class="page-title">Notas</h1>
-<p class="page-subtitle">
-  Registro y control de notas académicas
-</p>
+<p class="page-subtitle">Administración de notas</p>
 
-<div class="card-grid">
-  <mat-card class="info-card">
-    <h3>Notas registradas</h3>
-    <p class="value">—</p>
-  </mat-card>
-
-  <mat-card class="info-card">
-    <h3>Promedio general</h3>
-    <p class="value">—</p>
-  </mat-card>
+<!-- Barra superior -->
+<div class="page-actions">
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="crear()">
+    + Ingresar nota
+  </button>
 </div>
+
+<mat-table [dataSource]="dataSource" class="mat-elevation-z2" style="margin-top: 16px">
+
+  <ng-container matColumnDef="estudiante">
+    <mat-header-cell *matHeaderCellDef> Estudiante </mat-header-cell>
+    <mat-cell *matCellDef="let n"> {{ n.estudiante || '-' }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="profesor">
+    <mat-header-cell *matHeaderCellDef> Profesor </mat-header-cell>
+    <mat-cell *matCellDef="let n"> {{ n.profesor || '-' }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="materia">
+    <mat-header-cell *matHeaderCellDef> Materia </mat-header-cell>
+    <mat-cell *matCellDef="let n"> {{ n.materia }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="valor">
+    <mat-header-cell *matHeaderCellDef> Nota </mat-header-cell>
+    <mat-cell *matCellDef="let n"> {{ n.valor }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="acciones">
+    <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+    <mat-cell *matCellDef="let n">
+      <button mat-icon-button color="warn" (click)="eliminar(n.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+</mat-table>
